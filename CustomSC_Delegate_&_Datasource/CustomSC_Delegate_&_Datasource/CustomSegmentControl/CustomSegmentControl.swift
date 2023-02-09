@@ -7,6 +7,7 @@
 
 import UIKit
 
+//MARK: Custom segment control
 public class CustomSegmentControl: UIView {
     
     @IBOutlet weak var containerView: UIView!
@@ -146,6 +147,10 @@ public class CustomSegmentControl: UIView {
                         button.setAttributedTitle(self.attributedStringForTextColor(buttonTitle: button.titleLabel?.text ?? "", nonSelectedSegmentTextColor: false), for: .normal)
                         delegate.didSelectSegment(at: self.selectedSegmentIndex, in: self)
                     }
+                } else {
+                    if datasource.showLogInfo(in: self) {
+                        print("Index \(selectedSegmentIndex) is already selected")
+                    }
                 }
             } else {
                 button.setAttributedTitle(attributedStringForTextColor(buttonTitle: button.titleLabel?.text ?? ""), for: .normal)
@@ -199,6 +204,7 @@ public protocol CustomSCDatasource: AnyObject {
     func borderColor(in segmentControl: CustomSegmentControl) -> UIColor
     func showAnimation(in segmentControl: CustomSegmentControl) -> Bool
     func backgroundColor(of segmentControl: CustomSegmentControl) -> UIColor
+    func showLogInfo(in segmentControl: CustomSegmentControl) -> Bool
 }
 
 public extension CustomSCDatasource {
@@ -244,6 +250,10 @@ public extension CustomSCDatasource {
     
     func titleFontOfNonSelectedSegment(in segmentControl: CustomSegmentControl) -> CustomSCFont {
         return .defaultFont
+    }
+    
+    func showLogInfo(in segmentControl: CustomSegmentControl) -> Bool {
+        return true
     }
     
 }
