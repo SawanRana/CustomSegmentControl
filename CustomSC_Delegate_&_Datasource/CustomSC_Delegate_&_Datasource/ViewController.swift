@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var customSC_1: CustomSegmentControl!
-    
+    @IBOutlet weak var customSC_2: CustomSegmentControl!
     @IBOutlet weak var customSC: CustomSegmentControl!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +22,10 @@ class ViewController: UIViewController {
         customSC_1.datasource = self
         customSC_1.delegate = self
         customSC_1.reloadData()
+        
+        customSC_2.datasource = self
+        customSC_2.delegate = self
+        customSC_2.reloadData()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
             guard let _ = self else {
@@ -57,7 +61,21 @@ extension ViewController: CustomSCDatasource {
     }
     
     func backgroundColor(of segmentControl: CustomSegmentControl) -> UIColor {
+        if segmentControl ==  customSC_1 {
+            return UIColor.systemTeal
+        }
+        if segmentControl == customSC_2 {
+            return UIColor.systemMint
+        }
         return UIColor.systemCyan
+    }
+    
+    func borderWidth(in segmentControl: CustomSegmentControl) -> CGFloat {
+        return 2.0
+    }
+    
+    func borderColor(in segmentControl: CustomSegmentControl) -> UIColor {
+        return UIColor.systemOrange
     }
     
 }

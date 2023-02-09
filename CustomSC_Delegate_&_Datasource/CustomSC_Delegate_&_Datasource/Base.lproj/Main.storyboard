@@ -17,13 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ug0-j9-XuG">
-                                <rect key="frame" x="20" y="44" width="374" height="300"/>
+                                <rect key="frame" x="20" y="44" width="374" height="100"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yl9-yD-ogM">
-                                        <rect key="frame" x="10" y="10" width="354" height="280"/>
+                                        <rect key="frame" x="10" y="10" width="354" height="80"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FuW-iY-DTX" customClass="CustomSegmentControl" customModule="CustomSC_Delegate___Datasource" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="354" height="280"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="354" height="80"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             </view>
                                         </subviews>
@@ -41,23 +41,33 @@
                                     <constraint firstItem="yl9-yD-ogM" firstAttribute="leading" secondItem="ug0-j9-XuG" secondAttribute="leading" constant="10" id="1xz-QN-2cx"/>
                                     <constraint firstItem="yl9-yD-ogM" firstAttribute="top" secondItem="ug0-j9-XuG" secondAttribute="top" constant="10" id="5nX-4j-g5b"/>
                                     <constraint firstAttribute="bottom" secondItem="yl9-yD-ogM" secondAttribute="bottom" constant="10" id="Ywr-eo-uUJ"/>
-                                    <constraint firstAttribute="height" constant="300" id="ioB-r7-Hdd"/>
+                                    <constraint firstAttribute="height" constant="100" id="ioB-r7-Hdd"/>
                                     <constraint firstAttribute="trailing" secondItem="yl9-yD-ogM" secondAttribute="trailing" constant="10" id="por-mU-gj5"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HK2-fu-tia" customClass="CustomSegmentControl" customModule="CutomSCWithDataSourceAndDelegate" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HK2-fu-tia" customClass="CustomSegmentControl" customModule="CustomSC_Delegate___Datasource" customModuleProvider="target">
                                 <rect key="frame" x="20" y="428" width="374" height="40"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Ume-Ze-lE7"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8pv-Oy-YJx" customClass="CustomSegmentControl" customModule="CustomSC_Delegate___Datasource" customModuleProvider="target">
+                                <rect key="frame" x="10" y="518" width="394" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Ive-3J-62I"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="8pv-Oy-YJx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="19D-Uu-gav"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HK2-fu-tia" secondAttribute="trailing" constant="20" id="5XC-ub-qd3"/>
                             <constraint firstItem="ug0-j9-XuG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="B3r-d2-MMg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8pv-Oy-YJx" secondAttribute="trailing" constant="10" id="UYq-YR-hC8"/>
+                            <constraint firstItem="8pv-Oy-YJx" firstAttribute="top" secondItem="HK2-fu-tia" secondAttribute="bottom" constant="50" id="Ued-FN-D1R"/>
                             <constraint firstItem="ug0-j9-XuG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="c44-un-927"/>
                             <constraint firstItem="HK2-fu-tia" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="gI2-fJ-KfH"/>
                             <constraint firstItem="HK2-fu-tia" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="gfu-Um-28n"/>
@@ -68,6 +78,7 @@
                     <connections>
                         <outlet property="customSC" destination="HK2-fu-tia" id="8b0-xf-vMe"/>
                         <outlet property="customSC_1" destination="FuW-iY-DTX" id="yXW-RM-Clz"/>
+                        <outlet property="customSC_2" destination="8pv-Oy-YJx" id="PfP-Ij-aLD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

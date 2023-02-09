@@ -38,6 +38,8 @@ public class CustomSegmentControl: UIView {
     override public func layoutSubviews() {
         super.layoutSubviews()
         
+        layer.borderColor = datasource?.borderColor(in: self).cgColor
+        layer.borderWidth = datasource?.borderWidth(in: self) ?? 0.0
         backgroundColor = datasource?.backgroundColor(of: self) ?? .clear
     }
     
@@ -61,9 +63,6 @@ public class CustomSegmentControl: UIView {
         
         let numberOfSegments = datasource.numberOfSegments(in: self)
         if numberOfSegments > 0 {
-            
-            layer.borderColor = datasource.borderColor(in: self).cgColor
-            layer.borderWidth = datasource.borderWidth(in: self)
             
             for segment in 0..<numberOfSegments {
                 let button = UIButton(type: .custom)
@@ -155,12 +154,16 @@ public class CustomSegmentControl: UIView {
     }
 
     private func attributedStringForTextColor(buttonTitle: String, nonSelectedSegmentTextColor: Bool = true) -> NSAttributedString {
-        var attributes = [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 12), NSAttributedString.Key.foregroundColor: datasource?.titleColorOfNonSelectedSegment(in: self)]
-        if !nonSelectedSegmentTextColor {
-            attributes = [NSAttributedString.Key.font: UIFont(name: "Helvetica Neue", size: 12), NSAttributedString.Key.foregroundColor:  datasource?.titleColorOfSelectedSegment(in: self)]
+        let combinedAttributedString = NSMutableAttributedString()
+        if let datasource = datasource {
+            var attributes = [NSAttributedString.Key.font: datasource.titleFontOfNonSelectedSegment(in: self).font, NSAttributedString.Key.foregroundColor: datasource.titleColorOfNonSelectedSegment(in: self)]
+            if !nonSelectedSegmentTextColor {
+                attributes = [NSAttributedString.Key.font: datasource.titleFontOfSelectedSegment(in: self).font, NSAttributedString.Key.foregroundColor:  datasource.titleColorOfSelectedSegment(in: self)]
+            }
+            let attributedString = NSAttributedString(string: buttonTitle, attributes: attributes as [NSAttributedString.Key : Any])
+            combinedAttributedString.append(attributedString)
         }
-        let attributedString = NSAttributedString(string: buttonTitle, attributes: attributes as [NSAttributedString.Key : Any])
-        return attributedString
+        return combinedAttributedString
     }
 
 }
@@ -190,6 +193,8 @@ public protocol CustomSCDatasource: AnyObject {
     func colorOfSelectedSegment(in segmentControl: CustomSegmentControl) -> UIColor
     func titleColorOfSelectedSegment(in segmentControl: CustomSegmentControl) -> UIColor
     func titleColorOfNonSelectedSegment(in segmentControl: CustomSegmentControl) -> UIColor
+    func titleFontOfSelectedSegment(in segmentControl: CustomSegmentControl) -> CustomSCFont
+    func titleFontOfNonSelectedSegment(in segmentControl: CustomSegmentControl) -> CustomSCFont
     func borderWidth(in segmentControl: CustomSegmentControl) -> CGFloat
     func borderColor(in segmentControl: CustomSegmentControl) -> UIColor
     func showAnimation(in segmentControl: CustomSegmentControl) -> Bool
@@ -233,6 +238,14 @@ public extension CustomSCDatasource {
         return UIColor.clear
     }
     
+    func titleFontOfSelectedSegment(in segmentControl: CustomSegmentControl) -> CustomSCFont {
+        return .defaultFont
+    }
+    
+    func titleFontOfNonSelectedSegment(in segmentControl: CustomSegmentControl) -> CustomSCFont {
+        return .defaultFont
+    }
+    
 }
 
 public protocol CustomSCDelegate: AnyObject {
@@ -244,4 +257,10 @@ public protocol CustomSCDelegate: AnyObject {
 public struct CustomSCInset {
     var inset: CGFloat
     static var zero = CustomSCInset(inset: 0.0)
+}
+
+public struct CustomSCFont {
+    var font: UIFont
+    
+    static var defaultFont = CustomSCFont(font: UIFont(name: "Helvetica Neue", size: 12)!)
 }
