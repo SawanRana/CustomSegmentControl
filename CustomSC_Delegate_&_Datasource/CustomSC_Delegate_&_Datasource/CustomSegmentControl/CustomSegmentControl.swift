@@ -75,6 +75,9 @@ public class CustomSegmentControl: UIView {
             
             
             // MARK: Setting up selected segment
+            if datasource.defaultSegmentIndex(in: self) < numberOfSegments && datasource.defaultSegmentIndex(in: self) > -1 {
+                selectedSegmentIndex = datasource.defaultSegmentIndex(in: self)
+            }
             let selectedButton = segmentButtons[selectedSegmentIndex]
             selectedButton.setAttributedTitle(attributedStringForTextColor(buttonTitle: selectedButton.titleLabel?.text ?? "", nonSelectedSegmentTextColor: false), for: .normal)
             
@@ -191,7 +194,6 @@ public protocol CustomSCDatasource: AnyObject {
     func numberOfSegments(in segmentControl: CustomSegmentControl) -> Int
     func titleOfSegment(at index: Int, segmentControl: CustomSegmentControl) -> String
     
-    
     // MARK: - @optional methods
     func minInterSegmentSpacing(in segmentControl: CustomSegmentControl) -> CGFloat
     func minInset(in segmentControl: CustomSegmentControl) -> CustomSCInset
@@ -205,6 +207,7 @@ public protocol CustomSCDatasource: AnyObject {
     func showAnimation(in segmentControl: CustomSegmentControl) -> Bool
     func backgroundColor(of segmentControl: CustomSegmentControl) -> UIColor
     func showLogInfo(in segmentControl: CustomSegmentControl) -> Bool
+    func defaultSegmentIndex(in segmentControl: CustomSegmentControl) -> Int
 }
 
 public extension CustomSCDatasource {
@@ -254,6 +257,10 @@ public extension CustomSCDatasource {
     
     func showLogInfo(in segmentControl: CustomSegmentControl) -> Bool {
         return true
+    }
+    
+    func defaultSegmentIndex(in segmentControl: CustomSegmentControl) -> Int {
+        return 0
     }
     
 }

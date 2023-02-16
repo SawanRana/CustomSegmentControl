@@ -41,15 +41,14 @@ extension ViewController: CustomSCDatasource {
     func titleOfSegment(at index: Int, segmentControl: CustomSegmentControl) -> String {
         
         if index == 0 {
-            return "Sawan"
+            return "Seg 0"
         } else if index == 1 {
-            return "Kake"
+            return "Seg 1"
         } else if index == 2 {
-            return "Muskan"
+            return "Seg 2"
         }
         
-        
-        return "Unknown"
+        return "Seg ?"
     }
     
     func numberOfSegments(in segmentControl: CustomSegmentControl) -> Int {
@@ -76,6 +75,18 @@ extension ViewController: CustomSCDatasource {
     
     func borderColor(in segmentControl: CustomSegmentControl) -> UIColor {
         return UIColor.systemOrange
+    }
+    
+    func defaultSegmentIndex(in segmentControl: CustomSegmentControl) -> Int {
+        if segmentControl == customSC {
+            return 0
+        } else if segmentControl == customSC_1 {
+            return 1
+        } else if segmentControl == customSC_2 {
+            return 2
+        }
+        
+        return 0
     }
     
 }
